@@ -1,5 +1,5 @@
 {
-  "name": "with-magic",
+  "name": "AeGIS-ArcFUN",
   "scripts": {
     "dev": "next",
     "build": "next build",

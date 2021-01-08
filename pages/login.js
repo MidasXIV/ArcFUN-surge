@@ -22,6 +22,7 @@ const Login = () => {
 
     try {
       const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY)
+      // decentralized identifier or DID
       const didToken = await magic.auth.loginWithMagicLink({
         email: body.email,
       })

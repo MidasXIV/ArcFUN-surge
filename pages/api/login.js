@@ -4,6 +4,7 @@ import { setTokenCookie } from '../../lib/auth-cookies'
 
 export default async function login(req, res) {
   try {
+    if (req.method !== 'POST') return res.status(405).end()
     const didToken = req.headers.authorization.substr(7)
     const metadata = await magic.users.getMetadataByToken(didToken)
     const session = { ...metadata }
