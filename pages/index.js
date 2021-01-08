@@ -6,7 +6,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <h1>Magic Example</h1>
+      <h1 className="pb-2 font-mono">Magic Example</h1>
 
       <p>Steps to test this authentication example:</p>
 
