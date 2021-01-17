@@ -21,11 +21,14 @@ const Login = () => {
     }
 
     try {
+
+      /* Step 4.1: Create instance of MAgic using PUBLISHABLE KEY */
       const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY)
-      // decentralized identifier or DID
-      const didToken = await magic.auth.loginWithMagicLink({
-        email: body.email,
-      })
+
+      /* Step 4.2: Generate a DID (decentralized identifier) token with Magic */
+      const didToken = await magic.auth.loginWithMagicLink({ email: body.email })
+      
+      /* Step 4.6: Make POST request to /api/login */
       const res = await fetch('/api/login', {
         method: 'POST',
         headers: {
@@ -34,6 +37,8 @@ const Login = () => {
         },
         body: JSON.stringify(body),
       })
+
+      /* Step 4.7: If Successful redirect to Home page */
       if (res.status === 200) {
         Router.push('/')
       } else {

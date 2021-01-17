@@ -1,11 +1,30 @@
 import { useUser } from '../lib/hooks'
 import Layout from '../components/layout'
+import { connectToDatabase } from '../lib/mongodb'
 
-const Home = () => {
+export async function getServerSideProps(context) {
+  const { client } = await connectToDatabase()
+
+  const isConnected = await client.isConnected()
+
+  return {
+    props: { isConnected },
+  }
+}
+
+const Home = ({ isConnected }) => {
   const user = useUser()
 
   return (
     <Layout>
+      {isConnected ? (
+          <h2 className="subtitle">You are connected to MongoDB</h2>
+        ) : (
+          <h2 className="subtitle">
+            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
+            for instructions.
+          </h2>
+        )}
       <h1 className="pb-2 font-mono">Magic Example</h1>
 
       <p>Steps to test this authentication example:</p>

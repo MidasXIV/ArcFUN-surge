@@ -10,6 +10,7 @@
     "@magic-sdk/admin": "1.0.0",
     "cookie": "0.4.0",
     "magic-sdk": "1.0.1",
+    "mongodb": "^3.6.3",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
