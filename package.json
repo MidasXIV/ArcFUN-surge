@@ -11,6 +11,7 @@
     "cookie": "0.4.0",
     "magic-sdk": "1.0.1",
     "mongodb": "^3.6.3",
+    "mongoose": "^5.11.12",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

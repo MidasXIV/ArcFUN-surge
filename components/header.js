@@ -6,9 +6,9 @@ const Header = () => {
 
   return (
     <header className="p-2 flex justify-end">
-      <nav className="sm:max-w-xs w-full bg-black rounded-lg">
-        <ul className="p-3 flex flex-row justify-around">
-          <li className="bg-gray-900 text-gray-400 hover:bg-gray-600 cursor-pointer p-3 rounded-md text-sm font-medium icon">
+      <nav className="sm:max-w-xs bg-black rounded-lg shadow-lg">
+        <ul className="p-3 flex flex-row justify-around space-x-5">
+          <li className="bg-blue-400 text-white hover:bg-pink-600 transition-colors duration-500 cursor-pointer p-3 rounded-md text-sm font-medium icon">
             <Link href="/">
               <svg xmlns="http://www.w3.org/2000/svg" 
                 fill="none" 
@@ -24,14 +24,14 @@ const Header = () => {
           </li>
           {user ? (
             <>
-              <li className="bg-gray-900 text-gray-400 hover:bg-gray-600 cursor-pointer p-3 rounded-md text-sm font-medium icon">
+              <li className="bg-blue-400 text-white hover:bg-pink-600 transition-colors duration-500 cursor-pointer p-3 rounded-md text-sm font-medium icon">
                 <Link href="/profile">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
 </svg>
                 </Link>
               </li>
-              <li className="bg-gray-900 text-gray-400 hover:bg-gray-600 cursor-pointer p-3 rounded-md text-sm font-medium icon">
+              <li className="bg-blue-400 text-white hover:bg-pink-600 transition-colors duration-500 cursor-pointer p-3 rounded-md text-sm font-medium icon">
                 <a href="/api/logout">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -40,7 +40,7 @@ const Header = () => {
               </li>
             </>
           ) : (
-            <li className="bg-gray-900 text-gray-400 hover:bg-gray-600 cursor-pointer p-3 rounded-md text-sm font-medium icon">
+            <li className="bg-blue-400 text-white hover:bg-pink-600 transition-colors duration-500 cursor-pointer p-3 rounded-md text-sm font-medium icon">
               <Link href="/login">
               <svg xmlns="http://www.w3.org/2000/svg" 
               fill="none" 

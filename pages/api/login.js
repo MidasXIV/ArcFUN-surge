@@ -13,6 +13,12 @@ export default async function login(req, res) {
 
     /* Step 4.4: Get or create a user's entity in MongoDB */
 
+    // We auto-detect signups if `getUserByEmail` resolves to `undefined`
+    // const user = await userModel.getUserByEmail(email) ?? await userModel.createUser(email);
+    // const token = await userModel.obtainFaunaDBToken(user);
+
+    // Once we have the user's verified information, we can create
+    // a session cookie!
 
     /* Step 4.5: Create Encrypted Session using Iron and Set Cookie */
     // The token is a string with the encrypted session

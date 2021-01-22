@@ -3,9 +3,15 @@ import Layout from '../components/layout'
 import { connectToDatabase } from '../lib/mongodb'
 
 export async function getServerSideProps(context) {
-  const { client } = await connectToDatabase()
+  const { client, db } = await connectToDatabase()
 
-  const isConnected = await client.isConnected()
+  const isConnected = await client.isConnected();
+
+  const listingsAndReviews = await db.collection("listingsAndReviews").find().sort({_id:1}).limit(5).toArray();
+  console.log(listingsAndReviews.map(item => ({
+    name: item.name,
+    summary: item.summary
+  })))
 
   return {
     props: { isConnected },
