@@ -7,7 +7,7 @@ export async function getServerSideProps(context) {
 
   const isConnected = await client.isConnected();
 
-  const listingsAndReviews = await db.collection("listingsAndReviews").find().sort({_id:1}).limit(5).toArray();
+  const listingsAndReviews = await db.collection("listingsAndReviews").find().sort({_id:1}).limit(2).toArray();
   console.log(listingsAndReviews.map(item => ({
     name: item.name,
     summary: item.summary

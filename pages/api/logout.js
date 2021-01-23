@@ -1,6 +1,5 @@
 import { magic } from '../../lib/magic'
-import { removeTokenCookie } from '../../lib/auth-cookies'
-import { getSession } from '../../lib/iron'
+import { getSession, removeTokenCookie } from '../../lib/auth-cookies'
 
 export default async function logout(req, res) {
   const session = await getSession(req)
