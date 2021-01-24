@@ -1,6 +1,7 @@
 import { useUser } from '../lib/hooks'
 import Layout from '../components/layout'
 import { connectToDatabase } from '../lib/mongodb'
+import LevelCard from '../components/level-card';
 
 export async function getServerSideProps(context) {
   const { client, db } = await connectToDatabase()
@@ -21,16 +22,31 @@ export async function getServerSideProps(context) {
 const Home = ({ isConnected }) => {
   const user = useUser()
 
+  const cardProps = {
+    title:"Level 145", 
+    summary:"Unlocked at 2:30 PM", 
+    state:"neutral",
+    hints: 1
+  }
   return (
     <Layout>
+      <div class="text-6xl pb-4 font-semibold text-gray-900 leading-none">Login to join the Fun!</div>
       {isConnected ? (
-          <h2 className="subtitle">You are connected to MongoDB</h2>
+        <>
+          <h2 className="font-mono">You are connected to MongoDB</h2>
+          <div class="p-2 rounded-md bg-black w-min">
+            <span class="block h-4 w-4 bg-green-400 rounded-full bottom-0 right-0"></span>
+          </div>
+    </>
         ) : (
           <h2 className="subtitle">
             You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
             for instructions.
           </h2>
         )}
+
+          <LevelCard {...cardProps} />
+
       <h1 className="pb-2 font-mono">Magic Example</h1>
 
       <p>Steps to test this authentication example:</p>

@@ -11,7 +11,7 @@ const Layout = (props) => (
     <Header />
 
     <main>
-      <div className="container">{props.children}</div>
+      <div className="max-w-3xl w-full py-4 px-8 mx-auto">{props.children}</div>
     </main>
 
     <footer>
@@ -36,11 +36,6 @@ const Layout = (props) => (
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
           'Helvetica Neue', Arial, Noto Sans, sans-serif, 'Apple Color Emoji',
           'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-      }
-      .container {
-        max-width: 42rem;
-        margin: 0 auto;
-        padding: 2rem 1.25rem;
       }
       footer {
         width: 100%;
