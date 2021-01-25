@@ -1,13 +1,9 @@
-import {
-  Schema,
-  model,
-  models
-} from 'mongoose';
+import { Schema, model, models } from "mongoose";
 
 const LevelStatisticsSchema = new Schema({
   startedAt: Number,
   completedAt: Number,
-  hintsTaken: Number,
+  hintsTaken: Number
 });
 
 const UserSchema = Schema({
@@ -38,4 +34,4 @@ const UserSchema = Schema({
   }
 });
 
-module.exports = models.user || model('user', UserSchema);
+module.exports = models.user || model("user", UserSchema);

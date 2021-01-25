@@ -1,51 +1,60 @@
-import { useUser } from '../lib/hooks'
-import Layout from '../components/layout'
-import { connectToDatabase } from '../lib/mongodb'
-import LevelCard from '../components/level-card';
+import { useUser } from "../lib/hooks";
+import Layout from "../components/layout";
+import { connectToDatabase } from "../lib/mongodb";
+import LevelCard from "../components/level-card";
 
 export async function getServerSideProps(context) {
-  const { client, db } = await connectToDatabase()
+  const { client, db } = await connectToDatabase();
 
   const isConnected = await client.isConnected();
 
-  const listingsAndReviews = await db.collection("listingsAndReviews").find().sort({_id:1}).limit(2).toArray();
-  console.log(listingsAndReviews.map(item => ({
-    name: item.name,
-    summary: item.summary
-  })))
+  const listingsAndReviews = await db
+    .collection("listingsAndReviews")
+    .find()
+    .sort({ _id: 1 })
+    .limit(2)
+    .toArray();
+  console.log(
+    listingsAndReviews.map((item) => ({
+      name: item.name,
+      summary: item.summary
+    }))
+  );
 
   return {
-    props: { isConnected },
-  }
+    props: { isConnected }
+  };
 }
 
 const Home = ({ isConnected }) => {
-  const user = useUser()
+  const user = useUser();
 
   const cardProps = {
-    title:"Level 145", 
-    summary:"Unlocked at 2:30 PM", 
-    state:"neutral",
+    title: "Level 145",
+    summary: "Unlocked at 2:30 PM",
+    state: "neutral",
     hints: 1
-  }
+  };
   return (
     <Layout>
-      <div class="text-6xl pb-4 font-semibold text-gray-900 leading-none">Login to join the Fun!</div>
+      <div className="text-6xl pb-4 font-semibold text-gray-900 leading-none">
+        Login to join the Fun!
+      </div>
       {isConnected ? (
         <>
           <h2 className="font-mono">You are connected to MongoDB</h2>
-          <div class="p-2 rounded-md bg-black w-min">
-            <span class="block h-4 w-4 bg-green-400 rounded-full bottom-0 right-0"></span>
+          <div className="p-2 rounded-md bg-black w-min">
+            <span className="block h-4 w-4 bg-green-400 rounded-full bottom-0 right-0" />
           </div>
-    </>
-        ) : (
-          <h2 className="subtitle">
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-            for instructions.
-          </h2>
-        )}
+        </>
+      ) : (
+        <h2 className="subtitle">
+          You are NOT connected to MongoDB. Check the <code>README.md</code> for
+          instructions.
+        </h2>
+      )}
 
-          <LevelCard {...cardProps} />
+      <LevelCard {...cardProps} />
 
       <h1 className="pb-2 font-mono">Magic Example</h1>
 
@@ -64,7 +73,7 @@ const Home = ({ isConnected }) => {
       </ol>
 
       <p>
-        To learn more about Magic, visit their{' '}
+        To learn more about Magic, visit their{" "}
         <a
           href="https://docs.magic.link/"
           target="_blank"
@@ -88,7 +97,7 @@ const Home = ({ isConnected }) => {
         }
       `}</style>
     </Layout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
