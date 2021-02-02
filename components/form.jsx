@@ -1,8 +1,8 @@
 const Form = ({ errorMessage, onSubmit }) => (
   <form onSubmit={onSubmit}>
-    <label>
+    <label htmlFor="email-input">
       <span>Email</span>
-      <input type="email" name="email" required />
+      <input id="email-input" type="email" name="email" required />
     </label>
 
     <div className="submit">

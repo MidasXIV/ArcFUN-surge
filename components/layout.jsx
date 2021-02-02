@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Header from "./header";
 
-const Layout = (props) => (
+const Layout = ({ children }) => (
   <>
     <Head>
       <title>Magic</title>
@@ -11,10 +11,12 @@ const Layout = (props) => (
     <Header />
 
     <main>
-      <div className="max-w-3xl w-full py-4 px-8 mx-auto">{props.children}</div>
+      <div className="max-w-6xl w-full flex-grow py-4 px-8 mx-auto">
+        {children}
+      </div>
     </main>
 
-    <footer>
+    <footer className="footer border border-gray-200 w-full p-2 h-12 flex justify-center items-center">
       <a
         href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
         target="_blank"
@@ -36,14 +38,6 @@ const Layout = (props) => (
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, Noto Sans, sans-serif, "Apple Color Emoji",
           "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      }
-      footer {
-        width: 100%;
-        height: 100px;
-        border-top: 1px solid #eaeaea;
-        display: flex;
-        justify-content: center;
-        align-items: center;
       }
     `}</style>
   </>
