@@ -1,37 +1,36 @@
-import { Schema, model, models } from "mongoose";
+import User from "../schemas/user-schema";
+import { connectToDatabase } from "../lib/mongodb";
 
-const LevelStatisticsSchema = new Schema({
-  startedAt: Number,
-  completedAt: Number,
-  hintsTaken: Number
-});
+export default class UserModel {
+  async createUser(email) {
+    console.log(`creating new User: ${email}`);
+    const { db } = await connectToDatabase();
 
-const UserSchema = Schema({
-  token: {
-    type: String,
-    required: false,
-    unique: true
-  },
-  email: {
-    type: String,
-    required: [true, "Email already in use"],
-    unique: true,
-    index: true
-  },
-  name: {
-    type: String,
-    required: [false, "Username already in use"],
-    unique: true
-  },
-  level: {
-    type: Number,
-    required: [true, "Please provide a level"],
-    default: 1
-  },
-  statistics: {
-    type: [LevelStatisticsSchema],
-    required: false
+    return User.create({ email });
   }
-});
 
-module.exports = models.user || model("user", UserSchema);
+  async getUserByEmail(email) {
+    try {
+      const { db } = await connectToDatabase();
+      const user = User.findOne({ email });
+
+      if (!user) {
+        throw new Error("No user found");
+      }
+      return user;
+    } catch (err) {
+      return undefined;
+    }
+  }
+
+  async obtainFaunaDBToken(user) {
+    return adminClient
+      .query(q.Create(q.Tokens(), { instance: q.Select("ref", user) }))
+      .then((res) => res?.secret)
+      .catch(() => undefined);
+  }
+
+  async invalidateFaunaDBToken(token) {
+    await getClient(token).query(q.Logout(true));
+  }
+}

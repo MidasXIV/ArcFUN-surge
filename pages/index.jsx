@@ -1,4 +1,4 @@
-import { useUser } from "../lib/hooks";
+import { useUser } from "../hooks/user";
 import { connectToDatabase } from "../lib/mongodb";
 import Layout from "../components/layout";
 import RulesPanel from "../components/rules-panel";
@@ -32,22 +32,11 @@ const Home = ({ isConnected }) => {
   return (
     <Layout>
       {user ? (
-        <DashboardPanel user={user} />
+        <DashboardPanel user={user} isConnected={isConnected} />
       ) : (
         <div className="text-6xl pb-4 font-semibold text-gray-900 leading-none">
           Login to join the Fun!
         </div>
-      )}
-
-      {isConnected ? (
-        <>
-          <h2 className="font-mono">You are connected to MongoDB</h2>
-          <div className="p-2 rounded-md bg-black w-min">
-            <span className="block h-4 w-4 bg-green-400 rounded-full bottom-0 right-0" />
-          </div>
-        </>
-      ) : (
-        <h2 className="subtitle">Failure to connect to MongoDB.</h2>
       )}
 
       <h1 className="pb-2 text-4xl font-semibold text-gray-900 leading-none">
@@ -58,12 +47,6 @@ const Home = ({ isConnected }) => {
 
       <RulesPanel />
 
-      {/* {user && (
-        <>
-          <p>Currently logged in as:</p>
-          <pre>{JSON.stringify(user, null, 2)}</pre>
-        </>
-      )} */}
     </Layout>
   );
 };

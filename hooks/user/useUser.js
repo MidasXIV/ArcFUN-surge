@@ -1,15 +1,10 @@
+/* eslint-disable import/prefer-default-export */
 import { useEffect } from "react";
 import Router from "next/router";
 import useSWR from "swr";
+import fetcher from "../fetcher";
 
-const fetcher = (url) =>
-  fetch(url)
-    .then((r) => r.json())
-    .then((data) => {
-      return { user: data?.user || null };
-    });
-
-export function useUser({ redirectTo, redirectIfFound } = {}) {
+const useUser = ({ redirectTo, redirectIfFound } = {}) => {
   const { data, error } = useSWR("/api/user", fetcher);
   const user = data?.user;
   const finished = Boolean(data);
@@ -28,4 +23,6 @@ export function useUser({ redirectTo, redirectIfFound } = {}) {
   }, [redirectTo, redirectIfFound, finished, hasUser]);
 
   return error ? null : user;
-}
+};
+
+export { useUser };

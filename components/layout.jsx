@@ -16,15 +16,17 @@ const Layout = ({ children }) => (
       </div>
     </main>
 
-    <footer className="footer border border-gray-200 w-full p-2 h-12 flex justify-center items-center">
-      <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by <img src="/vercel.svg" alt="Vercel Logo" />
-      </a>
-    </footer>
+    {/* <footer className="footer w-full p-2 h-12 flex justify-center items-center">
+      <div className="bg-black text-white w-full rounded-lg shadow-lg">
+        <a
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powered by <img src="/vercel.svg" alt="Vercel Logo" />
+        </a>
+      </div>
+    </footer> */}
 
     <style jsx global>{`
       *,

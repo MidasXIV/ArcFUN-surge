@@ -1,7 +1,7 @@
 import { magic } from "../../lib/magic";
 import { encryptSession } from "../../lib/iron";
 import { setTokenCookie } from "../../lib/auth-cookies";
-import UserModel from "../../lib/user-model";
+import UserModel from "../../models/user-model";
 
 export default async function login(req, res) {
   try {

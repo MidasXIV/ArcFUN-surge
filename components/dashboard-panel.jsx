@@ -1,4 +1,4 @@
-const DashboardPanel = ({ user }) => (
+const DashboardPanel = ({ user, isConnected }) => (
   <div className="container mx-auto py-8 px-4 flex flex-col md:grid md:gap-4 md:grid-cols-4">
     {/* <!-- Beginning of First Tile --> */}
     <div className="md:order-1 md:row-span-1 md:col-span-2">
@@ -18,6 +18,21 @@ const DashboardPanel = ({ user }) => (
             </p>
             <p className="raleway text-sm my-4 text-white opacity-75">
               Currently logged in as {user.email}
+              {isConnected ? (
+                <div className="flex flex-row">
+                  Connection to Server
+                  <div className="p-2 rounded-md bg-black w-min">
+                    <span className="block h-2 w-2 bg-green-400 rounded-full bottom-0 right-0" />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-row">
+                  Connection to Server
+                  <div className="p-2 rounded-md bg-black w-min">
+                    <span className="block h-2 w-2 bg-red-400 rounded-full bottom-0 right-0" />
+                  </div>
+                </div>
+              )}
             </p>
           </div>
         </div>

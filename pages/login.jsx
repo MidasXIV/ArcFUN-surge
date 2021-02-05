@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Router from "next/router";
 import { Magic } from "magic-sdk";
-import { useUser } from "../lib/hooks";
+import { useUser } from "../hooks/user";
 import Layout from "../components/layout";
 import Form from "../components/form";
 
