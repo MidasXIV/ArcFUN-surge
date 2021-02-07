@@ -29,7 +29,7 @@ const Header = () => {
           {user ? (
             <>
               <li className="bg-blue-400 text-white hover:bg-pink-600 transition-colors duration-500 cursor-pointer p-3 rounded-md text-sm font-medium icon">
-                <Link href="/levels">
+                <Link href="/level">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
