@@ -51,7 +51,7 @@ const Login = () => {
   }
 
   return (
-    <Layout>
+    <Layout title="ArcFUN | Login">
       <div className="login">
         <Form errorMessage={errorMsg} onSubmit={handleSubmit} />
       </div>

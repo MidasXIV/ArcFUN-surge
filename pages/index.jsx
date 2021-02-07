@@ -30,7 +30,7 @@ export async function getServerSideProps() {
 const Home = ({ isConnected }) => {
   const user = useUser();
   return (
-    <Layout>
+    <Layout title="ArcFUN | Dashboard">
       {user ? (
         <DashboardPanel user={user} isConnected={isConnected} />
       ) : (
@@ -46,7 +46,6 @@ const Home = ({ isConnected }) => {
       <p />
 
       <RulesPanel />
-
     </Layout>
   );
 };
