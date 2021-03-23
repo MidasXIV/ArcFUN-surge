@@ -48,3 +48,6 @@ Install [Vercel CLI](https://vercel.com/download), log in to your account from t
 ```bash
 vercel env add
 ```
+### NOTES
+
+> Note that getStaticProps runs only on the server-side. It will never be run on the client-side. It won’t even be included in the JS bundle for the browser. That means you can write code such as direct database queries without them being sent to browsers. 

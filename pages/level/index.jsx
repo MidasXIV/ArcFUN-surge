@@ -12,7 +12,7 @@ const Level = () => {
   const user = useUser({ redirectTo: "/login" });
   const steps = {
     step1:
-      "get all Level info -> when the level will be unlocked; how many hint's are unlocked.",
+      "get all Level info (CSR) using hooks -> when the level will be unlocked; how many hint's are unlocked.",
     step2: "get users stats like levels completed.",
     step3: "combine the two.",
     step4: "clicking on the link should allow us to go to that level."
