@@ -1,5 +1,5 @@
 {
-  "name": "AeGIS-ArcFUN",
+  "name": "ArcFUN-surge",
   "scripts": {
     "dev": "next",
     "build": "next build",

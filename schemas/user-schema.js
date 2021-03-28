@@ -10,7 +10,7 @@ const UserSchema = Schema({
   token: {
     type: String,
     required: false,
-    unique: true
+    unique: false
   },
   email: {
     type: String,
@@ -21,7 +21,7 @@ const UserSchema = Schema({
   name: {
     type: String,
     required: [false, "Username already in use"],
-    unique: true
+    unique: false
   },
   level: {
     type: Number,
