@@ -1,6 +1,6 @@
 import { magic } from "../../lib/magic";
 import { encryptSession } from "../../lib/iron";
-import { setTokenCookie } from "../../lib/auth-cookies";
+import { createSession } from "../../lib/auth-cookies";
 import UserModel from "../../models/user-model";
 
 export default async function login(req, res) {
@@ -31,7 +31,7 @@ export default async function login(req, res) {
     /* Step 4.5: Create Encrypted Session using Iron and Set Cookie */
     // The token is a string with the encrypted session
     const token = await encryptSession(session);
-    setTokenCookie(res, token);
+    createSession(res, token);
 
     res.status(200).send({ done: true });
   } catch (error) {
