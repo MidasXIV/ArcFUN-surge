@@ -7,17 +7,17 @@ const HintsPanel = ({ hints }) => {
       <div className="px-3 py-5 text-gray-300">
         {/* Hint Panel Item */}
         <h3 className="text-gray-600 font-black">Hint 1</h3>
-        {hints[0].hint}
+        {hints?.[0]?.hint}
       </div>
       <div className="px-3 py-5 text-gray-300">
         {/* Hint Panel Item */}
         <h3 className="text-gray-600 font-black">Hint 2</h3>
-        {hints[1].hint}
+        {hints?.[1]?.hint}
       </div>
       <div className="px-3 py-5 text-gray-300">
         {/* Hint Panel Item */}
         <h3 className="text-gray-600 font-black">Hint 3</h3>
-        {hints[2].hint}
+        {hints?.[2]?.hint}
       </div>
     </div>
   );

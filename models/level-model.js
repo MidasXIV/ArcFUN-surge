@@ -12,8 +12,9 @@ export default class LeveLModel {
     const levelIDs = await db
       .collection("levels")
       .find()
-      .map((x) => x.id)
+      .map((x) => x._id)
       .toArray();
+      console.log(levelIDs);
     return JSON.stringify(levelIDs);
   }
 
