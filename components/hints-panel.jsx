@@ -1,7 +1,7 @@
-const HintPanelItem = ({ title, body }) => (
+const HintPanelItem = ({ title, description }) => (
   <div className="px-3 py-5 text-gray-300">
     <h3 className="text-gray-600 font-black">{title}</h3>
-    {body}
+    {description}
   </div>
 );
 
@@ -15,7 +15,7 @@ const HintsPanel = ({ hints }) => {
         <HintPanelItem
           key={hint?.id || `hint_${idx + 1}`}
           title={`Hint ${idx + 1}`}
-          body={hint.hint}
+          description={hint.description}
         />
       ))}
     </div>

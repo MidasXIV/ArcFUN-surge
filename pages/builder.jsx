@@ -41,23 +41,23 @@ const GalleryProps = {
 const HintProps = {
   hints: [
     {
-      hint: "look within!",
-      unlocksAt: formatDate("2021-04-02T13:00")
+      description: "look within!",
+      unlocksAt: formatDate("2021-04-08T13:00")
     },
     {
-      hint: "notepad!",
-      unlocksAt: formatDate("2021-04-02T16:00")
+      description: "notepad!",
+      unlocksAt: formatDate("2021-04-08T16:00")
     },
     {
-      hint: "follow the arrows",
-      unlocksAt: formatDate("2021-04-02T19:00")
+      description: "follow the arrows",
+      unlocksAt: formatDate("2021-04-08T19:00")
     }
   ]
 };
 
 const LevelProps = {
-  name: "level Name",
-  unlocksAt: formatDate("2021-04-02T10:00"),
+  name: "level Name 27",
+  unlocksAt: formatDate("2021-09-02T10:00"),
   solution: "Vivaldi"
 };
 
@@ -78,7 +78,7 @@ const Builder = (props) => {
       hints: HintProps.hints
     };
 
-    alert(`A Level was submitted: ${body}`);
+    alert(`A Level was submitted: ${JSON.stringify(body)}`);
 
     try {
       /* Step 4.6: Make POST request to /api/login */
