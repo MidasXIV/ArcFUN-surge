@@ -40,7 +40,7 @@ export default class LeveLModel {
 
       const summary = `level ${
         state === "disabled" ? "Unlocks" : "Unlocked"
-      } at ${currentDate - levelUnlocksAt}`;
+      } at ${currentDate - levelUnlocksAt} - ${currentDateISO}`;
 
       const hintsUnlocked = level.hints.reduce((hintsUnlocked, hint) => {
         const hintUnlocksAt = new Date(hint.unlocksAt);
