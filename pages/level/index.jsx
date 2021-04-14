@@ -20,6 +20,10 @@ const Level = () => {
     step3: "combine the two.",
     step4: "clicking on the link should allow us to go to that level."
   };
+
+  const levelCards =
+    levels && levels.map((level) => <LevelCard key={level.id} {...level} />);
+
   return (
     <Layout title="ArcFUN | Levels">
       {/* <pre>{JSON.stringify(steps, null, 2)}</pre> */}
@@ -34,6 +38,7 @@ const Level = () => {
         <LevelCard {...card1Props} state="loading" />
         <LevelCard {...card1Props} state="completed" />
         <LevelCard {...card1Props} state="disabled" />
+        {levelCards}
       </div>
     </Layout>
   );
