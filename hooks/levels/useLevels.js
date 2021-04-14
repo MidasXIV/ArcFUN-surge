@@ -4,25 +4,24 @@ import Router from "next/router";
 import useSWR from "swr";
 import fetcher from "../fetcher";
 
-const useUser = ({ redirectTo, redirectIfFound } = {}) => {
-  const { data, error } = useSWR("/api/user", fetcher("user"));
-  const user = data ?? null;
+const useLevels = ({ redirectTo, redirectIfFound } = {}) => {
+  const { data, error } = useSWR("/api/level", fetcher("levels"));
+  const levels = data ?? null;
   const finished = Boolean(data);
-  const hasUser = Boolean(user);
-
+  const hasLevels = Boolean(levels);
   useEffect(() => {
     if (!redirectTo || !finished) return;
     if (
       // If redirectTo is set, redirect if the user was not found.
-      (redirectTo && !redirectIfFound && !hasUser) ||
+      (redirectTo && !redirectIfFound && !hasLevels) ||
       // If redirectIfFound is also set, redirect if the user was found
-      (redirectIfFound && hasUser)
+      (redirectIfFound && hasLevels)
     ) {
       Router.push(redirectTo);
     }
-  }, [redirectTo, redirectIfFound, finished, hasUser]);
+  }, [redirectTo, redirectIfFound, finished, hasLevels]);
 
-  return error ? null : user;
+  return error ? null : levels;
 };
 
-export { useUser };
+export { useLevels };

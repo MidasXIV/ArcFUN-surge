@@ -9,6 +9,7 @@ const handlers = {
     // if no session throw unauthorised error
     console.log(`Getting All levels for ${email}`);
     const levelQuery = {}; // since we want all level query object is empty.
+    // extract just the name,unlocksAt and the hints.
     const levelProjection = {
       name: true,
       unlocksAt: true,
@@ -20,14 +21,9 @@ const handlers = {
       await levelModel.getLevel(levelQuery, levelProjection)
     );
 
+    // TODO: Extract which levels the user has unlocked.
     levels = levelModel.processLayer(levels);
-    // extract just the name,unlocksAt and the hints.
-    // Should check whether a specific level or all levels
-    // Extract which levels the user has unlocked.
 
-    // const { token } = await getSession(req)
-    // const todoModel = new TodoModel(token)
-    // const todo = await todoModel.getTodo(req.query.id)
     res.status(200).json({ levels });
   },
 

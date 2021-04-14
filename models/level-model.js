@@ -49,6 +49,7 @@ export default class LeveLModel {
       }, 0);
 
       return {
+        id: level._id,
         title: level.name,
         summary,
         state,
