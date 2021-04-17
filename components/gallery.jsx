@@ -117,7 +117,8 @@ const ImageGallerySwitch = ({ items }) => {
   }
 };
 
-const Gallery = ({ numberOfItems, items }) => {
+const Gallery = ({ numberOfItems, items = [] }) => {
+  console.log(items);
   return <ImageGallerySwitch items={items} />;
 };
 

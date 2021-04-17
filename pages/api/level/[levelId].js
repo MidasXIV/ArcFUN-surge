@@ -8,6 +8,7 @@ const handlers = {
     const { levelId } = req.query;
     const { email } = await getSession(req);
     // if no session throw unauthorised error
+    // TODO check if user has access to the below level
     console.log(`Getting level ${levelId} for ${email}`);
 
     const levelQuery = {
@@ -15,11 +16,11 @@ const handlers = {
     };
     // extract just the name,unlocksAt and the hints.
     const levelProjection = {
+      _id: false,
       name: true,
       unlocksAt: true,
-      hints: {
-        unlocksAt: true
-      }
+      hints: true,
+      gallery: true
     };
 
     let level = await JSON.parse(
@@ -27,9 +28,9 @@ const handlers = {
     );
 
     // TODO: Extract which levels the user has unlocked.
-    level = levelModel.processLayer(level);
+    // level = levelModel.processLayer(level);
 
-    res.status(200).json({ level });
+    res.status(200).json({ ...level[0] });
   }
 };
 

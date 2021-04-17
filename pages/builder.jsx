@@ -11,24 +11,24 @@ const formatDate = (date) => {
 
 const GalleryProps = {
   items: [
-    {
-      order: 2,
-      alt: "taxi driver",
-      src:
-        "https://user-images.githubusercontent.com/24829816/107695103-93460d00-6cc9-11eb-9625-9ac3bbf65ba1.png"
-    },
-    {
-      order: 4,
-      alt: "Todd",
-      src:
-        "https://user-images.githubusercontent.com/24829816/107821773-74fa1300-6d96-11eb-9619-bd20dfa8662b.png"
-    },
-    {
-      order: 3,
-      alt: "signal",
-      src:
-        "https://user-images.githubusercontent.com/24829816/107780180-c89d3a00-6d5f-11eb-8027-7f77c8f8de43.png"
-    },
+    // {
+    //   order: 2,
+    //   alt: "taxi driver",
+    //   src:
+    //     "https://user-images.githubusercontent.com/24829816/107695103-93460d00-6cc9-11eb-9625-9ac3bbf65ba1.png"
+    // },
+    // {
+    //   order: 4,
+    //   alt: "Todd",
+    //   src:
+    //     "https://user-images.githubusercontent.com/24829816/107821773-74fa1300-6d96-11eb-9619-bd20dfa8662b.png"
+    // },
+    // {
+    //   order: 3,
+    //   alt: "signal",
+    //   src:
+    //     "https://user-images.githubusercontent.com/24829816/107780180-c89d3a00-6d5f-11eb-8027-7f77c8f8de43.png"
+    // },
     {
       order: 1,
       alt: "pikachu",
@@ -56,7 +56,7 @@ const HintProps = {
 };
 
 const LevelProps = {
-  name: "level Name 27",
+  name: "Pikachuuu",
   unlocksAt: formatDate("2021-09-02T10:00"),
   solution: "Vivaldi"
 };
