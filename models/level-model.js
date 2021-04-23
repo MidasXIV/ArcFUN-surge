@@ -5,14 +5,13 @@ import Level from "../schemas/level-schema";
 
 export default class LeveLModel {
   async getLevelIDs() {
-    console.log(`Fetching Level IDs`);
     const { db } = await connectToDatabase();
-    const levelIDs = await db
-      .collection("levels")
-      .find()
-      .map((x) => x._id)
-      .toArray();
-    console.log(levelIDs);
+
+    const levelQuery = {};
+    const levelProjection = { _id: true };
+    let levelIDs = await this.getLevel(levelQuery, levelProjection);
+    levelIDs = await JSON.parse(levelIDs).map((x) => x._id);
+
     return JSON.stringify(levelIDs);
   }
 

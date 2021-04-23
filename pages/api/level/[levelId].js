@@ -28,6 +28,7 @@ const handlers = {
     );
 
     // TODO: Extract which levels the user has unlocked.
+    // Filter out level descriptions which are not unlocked
     // level = levelModel.processLayer(level);
 
     res.status(200).json({ ...level[0] });

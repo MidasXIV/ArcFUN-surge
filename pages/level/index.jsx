@@ -27,7 +27,7 @@ const Level = () => {
   return (
     <Layout title="ArcFUN | Levels">
       {/* <pre>{JSON.stringify(steps, null, 2)}</pre> */}
-      <pre>{JSON.stringify(levels, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(levels, null, 2)}</pre> */}
       <div className="flex flex-col justify-center items-center space-y-2 sm:space-y-0 sm:grid sm:gap-4 sm:grid-cols-2 md:grid-cols-4 ml-2 pt-4">
         <LevelCard {...card1Props} />
         <LevelCard {...card1Props} hintsUnlocked={3} />
