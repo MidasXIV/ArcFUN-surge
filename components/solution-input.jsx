@@ -1,10 +1,5 @@
-import { useState } from "react";
-
-const SolutionInput = ({ solution = "", onSubmit }) => {
-  const [input, setInput] = useState(solution);
-  async function handleChange(e) {
-    setInput(e.target.value);
-  }
+const SolutionInput = (props) => {
+  const { value = "", onChange, onSubmit } = props;
   return (
     <form
       onSubmit={onSubmit}
@@ -14,8 +9,8 @@ const SolutionInput = ({ solution = "", onSubmit }) => {
         type="text"
         className="p-4 rounded-lg text-gray-300 bg-black flex-1"
         placeholder="answer"
-        onChange={handleChange}
-        value={input}
+        onChange={onChange}
+        value={value}
       />
       <button
         type="submit"

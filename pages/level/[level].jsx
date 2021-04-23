@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useUser } from "../../hooks/user";
 import { useLevel } from "../../hooks/level";
 
@@ -5,6 +6,7 @@ import LevelModel from "../../models/level-model";
 import LevelLayout from "../../components/level-layout";
 import Gallery from "../../components/gallery";
 import HintsPanel from "../../components/hints-panel";
+import SolutionInput from "../../components/solution-input";
 
 const defaultLevelProps = {
   items: [],
@@ -17,6 +19,19 @@ const Level = ({ level }) => {
 
   const { hints, gallery } = levelData ?? defaultLevelProps;
 
+  const [input, setInput] = useState("");
+
+  async function handleChange(e) {
+    setInput(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(
+      `${user.email} tried to submit solution ${input} to level :: ${level.id}`
+    );
+  };
+
   // Do Authentication and Authorization here.
   return (
     <LevelLayout title="ArcFUN | Levels">
@@ -24,31 +39,11 @@ const Level = ({ level }) => {
         <div className="px-8 w-full md:w-2/3 lg:w-3/4 flex justify-center">
           <div className="flex flex-col max-w-2xl">
             <Gallery items={gallery} />
-            <form className="mt-3 p-3 w-full flex mx-auto bg-black rounded-lg">
-              <input
-                type="text"
-                className="p-4 rounded-lg text-gray-300 bg-black flex-1"
-                placeholder="answer"
-              />
-              <button
-                type="submit"
-                className="bg-blue-400 text-white hover:bg-pink-600 transition-colors duration-500 cursor-pointer p-3 rounded-md text-sm font-medium icon"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-8 h-8"
-                >
-                  <path
-                    fillRule="evenodd"
-                    strokeWidth="1"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-            </form>
+            <SolutionInput
+              value={input}
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+            />
           </div>
         </div>
         <HintsPanel hints={hints} />

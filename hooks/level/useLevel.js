@@ -12,7 +12,7 @@ const useLevel = ({ levelId } = {}) => {
   const finished = Boolean(data);
   const hasLevel = Boolean(level);
 
-  console.log(levels, finished, hasLevel);
+  // console.log(levels, finished, hasLevel);
 
   return error ? null : levels;
 };

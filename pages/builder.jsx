@@ -102,13 +102,23 @@ const Builder = (props) => {
     }
   }
 
+  const [input, setInput] = useState(LevelProps.solution);
+
+  async function handleChange(e) {
+    setInput(e.target.value);
+  }
+
   return (
     <LevelLayout title="ArcFUN | Builder">
       <div className="flex flex-col h-full md:flex-row justify-end px-2 md:space-x-3">
         <div className="px-8 w-full md:w-2/3 lg:w-3/4 flex justify-center">
           <div className="flex flex-col max-w-2xl">
             <Gallery {...GalleryProps} />
-            <SolutionInput {...LevelProps} onSubmit={handleSubmit} />
+            <SolutionInput
+              onChange={handleChange}
+              value={input}
+              onSubmit={handleSubmit}
+            />
           </div>
         </div>
         <HintsPanel {...HintProps} />
