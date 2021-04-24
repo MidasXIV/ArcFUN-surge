@@ -15,7 +15,11 @@ const defaultLevelProps = {
 
 const Level = ({ level }) => {
   const user = useUser({ redirectTo: "/login" });
-  const levelData = useLevel({ levelId: level.id });
+  const levelData = useLevel({
+    levelId: level.id,
+    redirectTo: "/login",
+    redirectIfUnauthorized: true
+  });
 
   const { hints, gallery } = levelData ?? defaultLevelProps;
 

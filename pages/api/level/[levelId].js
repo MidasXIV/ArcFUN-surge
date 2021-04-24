@@ -6,8 +6,12 @@ const handlers = {
   GET: async (req, res) => {
     const levelModel = new LevelModel();
     const { levelId } = req.query;
-    const { email } = await getSession(req);
+    const { email } = (await getSession(req)) || {};
     // if no session throw unauthorised error
+    if (!email) {
+      res.status(403).send(`Please login to access this API route`);
+      return;
+    }
     // TODO check if user has access to the below level
     console.log(`Getting level ${levelId} for ${email}`);
 

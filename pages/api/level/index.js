@@ -8,6 +8,7 @@ const handlers = {
     const { email } = (await getSession(req)) || {};
     if (!email) {
       res.status(403).end(`Please login to access this API route`);
+      return;
     }
     // if no session throw unauthorised error
     console.log(`Getting All levels for ${email}`);

@@ -17,7 +17,7 @@ const useLevels = ({
 
   useEffect(() => {
     if (!redirectTo || !finished) return;
-    if (redirectIfUnauthorized && hasError && error.statusCode === 403) {
+    if (redirectIfUnauthorized && hasError && error.status === 403) {
       Router.push(redirectTo);
     }
     if (
