@@ -3,7 +3,7 @@ import cn from "classnames";
 import Link from "next/link";
 
 const LevelCard = ({ id, title, summary, state, hintsUnlocked }) => {
-  console.log(title, summary, state, hintsUnlocked);
+  // console.log(title, summary, state, hintsUnlocked);
   const MAX_NUM_HINTS = 3;
   const isLoading = state === "loading";
   const isDisabled = state === "disabled";

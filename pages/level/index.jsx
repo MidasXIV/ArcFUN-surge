@@ -1,4 +1,3 @@
-import { useUser } from "../../hooks/user";
 import { useLevels } from "../../hooks/levels";
 import Layout from "../../components/layout";
 import LevelCard from "../../components/level-card";
@@ -10,9 +9,19 @@ const Level = () => {
     state: "",
     hintsUnlocked: 2
   };
-  const user = useUser({ redirectTo: "/login" });
-  const levels = useLevels();
-  console.log(levels);
+  const levels = useLevels({
+    redirectTo: "/login",
+    redirectIfUnauthorized: true
+  });
+
+  // if (!levels) {
+  //   return (
+  //     <ErrorLayout title="ArcFUN | Levels">
+  //       <Error statusCode={403} title="Please login to access this page" />
+  //     </ErrorLayout>
+  //   );
+  // }
+  // console.log(levels);
   const steps = {
     step1:
       "get all Level info (CSR) using hooks -> when the level will be unlocked; how many hint's are unlocked.",
@@ -23,6 +32,11 @@ const Level = () => {
 
   const levelCards =
     levels && levels.map((level) => <LevelCard key={level.id} {...level} />);
+
+  const levelCardsLoading = new Array(9)
+    .fill(0)
+    // eslint-disable-next-line react/no-array-index-key
+    .map((level, idx) => <LevelCard key={`level-${idx}`} state="loading" />);
 
   return (
     <Layout title="ArcFUN | Levels">
@@ -38,7 +52,7 @@ const Level = () => {
         <LevelCard {...card1Props} state="loading" />
         <LevelCard {...card1Props} state="completed" />
         <LevelCard {...card1Props} state="disabled" />
-        {levelCards}
+        {levels ? levelCards : levelCardsLoading}
       </div>
     </Layout>
   );

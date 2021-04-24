@@ -5,7 +5,10 @@ import { getSession } from "../../../lib/auth-cookies";
 const handlers = {
   GET: async (req, res) => {
     const levelModel = new LevelModel();
-    const { email } = await getSession(req);
+    const { email } = (await getSession(req)) || {};
+    if (!email) {
+      res.status(403).end(`Please login to access this API route`);
+    }
     // if no session throw unauthorised error
     console.log(`Getting All levels for ${email}`);
     const levelQuery = {}; // since we want all level query object is empty.
