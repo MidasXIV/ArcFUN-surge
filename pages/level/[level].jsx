@@ -31,9 +31,15 @@ const Level = ({ level }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    /** since the layout is flashed there's a
+     * chance of user clicking the submit button
+     */
     console.log(
       `${user.email} tried to submit solution ${input} to level :: ${level.id}`
     );
+
+    /** make request to API */
+    /** load some kind of indicator to show success or request */
   };
 
   // Do Authentication and Authorization here.

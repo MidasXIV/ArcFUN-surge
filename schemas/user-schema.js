@@ -1,8 +1,9 @@
 import { Schema, model, models } from "mongoose";
 
 const LevelStatisticsSchema = new Schema({
-  startedAt: Number,
-  completedAt: Number,
+  levelId: String,
+  unlockedAt: String,
+  solvedAt: String,
   hintsTaken: Number
 });
 

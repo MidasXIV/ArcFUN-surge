@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import User from "../schemas/user-schema";
 import { connectToDatabase } from "../lib/mongodb";
 
@@ -5,7 +6,6 @@ export default class UserModel {
   async createUser(email) {
     console.log(`creating new User: ${email}`);
     const { db } = await connectToDatabase();
-
     return User.create({ email });
   }
 
@@ -23,14 +23,20 @@ export default class UserModel {
     }
   }
 
-  async obtainFaunaDBToken(user) {
-    return adminClient
-      .query(q.Create(q.Tokens(), { instance: q.Select("ref", user) }))
-      .then((res) => res?.secret)
-      .catch(() => undefined);
+  async getUser(query = {}, projection = {}) {
+    const { db } = await connectToDatabase();
+    const user = await User.find(query, projection);
+    return JSON.stringify(user[0]) ?? undefined;
   }
 
-  async invalidateFaunaDBToken(token) {
-    await getClient(token).query(q.Logout(true));
+  getLevelsUnlocked(user) {
+    const { statistics } = user;
+    const levels = statistics.map((statistic) => statistic.levelId);
+    return levels;
+  }
+
+  hasUserUnlockedLevel(user, levelId) {
+    const levelsUnlocked = this.getLevelsUnlocked(user);
+    return levelsUnlocked.includes(levelId);
   }
 }

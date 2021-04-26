@@ -29,6 +29,13 @@ export default class LeveLModel {
     });
   }
 
+  isLevelUnlocked(level) {
+    const currentDateISO = new Date().toISOString();
+    const currentDate = new Date(currentDateISO);
+    const levelUnlocksAt = new Date(level.unlocksAt);
+    return currentDate - levelUnlocksAt >= 0;
+  }
+
   processLayer(levels) {
     const currentDateISO = new Date().toISOString();
     const currentDate = new Date(currentDateISO);
