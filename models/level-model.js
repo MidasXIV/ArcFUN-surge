@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
+import { getCurrentDate, parseDate } from "../lib/date-time";
 import { connectToDatabase } from "../lib/mongodb";
 import Level from "../schemas/level-schema";
 
@@ -36,23 +37,28 @@ export default class LeveLModel {
     return currentDate - levelUnlocksAt >= 0;
   }
 
+  getNumberOfHintsUnlocked(level) {
+    const currentDate = getCurrentDate();
+    const hintsUnlocked = level.hints.reduce((_hintsUnlocked, hint) => {
+      const hintUnlocksAt = parseDate(hint.unlocksAt);
+      const unlocked = currentDate - hintUnlocksAt > 0 ? 1 : 0;
+      return _hintsUnlocked + unlocked;
+    }, 0);
+    return hintsUnlocked;
+  }
+
   processLayer(levels) {
-    const currentDateISO = new Date().toISOString();
-    const currentDate = new Date(currentDateISO);
+    const currentDate = getCurrentDate();
 
     return levels.map((level) => {
-      const levelUnlocksAt = new Date(level.unlocksAt);
+      const levelUnlocksAt = parseDate(level.unlocksAt);
       const state = currentDate - levelUnlocksAt > 0 ? "" : "disabled";
 
       const summary = `level ${
         state === "disabled" ? "Unlocks" : "Unlocked"
-      } at ${currentDate - levelUnlocksAt} - ${currentDateISO}`;
+      } at ${currentDate - levelUnlocksAt}`;
 
-      const hintsUnlocked = level.hints.reduce((hintsUnlocked, hint) => {
-        const hintUnlocksAt = new Date(hint.unlocksAt);
-        const unlocked = currentDate - hintUnlocksAt > 0 ? 1 : 0;
-        return hintsUnlocked + unlocked;
-      }, 0);
+      const hintsUnlocked = this.getNumberOfHintsUnlocked(level);
 
       return {
         id: level._id,

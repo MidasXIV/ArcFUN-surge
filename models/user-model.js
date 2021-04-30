@@ -23,10 +23,16 @@ export default class UserModel {
     }
   }
 
-  async getUser(query = {}, projection = {}) {
+  async getUsers(query = {}, projection = {}) {
     const { db } = await connectToDatabase();
     const user = await User.find(query, projection);
-    return JSON.stringify(user[0]) ?? undefined;
+    return JSON.stringify(user) ?? undefined;
+  }
+
+  async getUser(query = {}, projection = {}) {
+    const { db } = await connectToDatabase();
+    const user = await User.findOne(query, projection);
+    return JSON.stringify(user) ?? undefined;
   }
 
   getLevelsUnlocked(user) {

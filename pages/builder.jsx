@@ -4,10 +4,7 @@ import LevelLayout from "../components/level-layout";
 import Gallery from "../components/gallery";
 import HintsPanel from "../components/hints-panel";
 import SolutionInput from "../components/solution-input";
-
-const formatDate = (date) => {
-  return new Date(date).toISOString();
-};
+import { formatDate } from "../lib/date-time";
 
 const GalleryProps = {
   items: [
