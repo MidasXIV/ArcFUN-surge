@@ -41,6 +41,22 @@ export default class UserModel {
     return levels;
   }
 
+  getLevelProfile(user, levelId) {
+    const { statistics } = user;
+    return statistics.find((statistic) => levelId === statistic.levelId);
+  }
+
+  updateLevelProfile(statistics, levelProfile) {
+    const statsWithoutLevel = statistics.filter(
+      (statistic) => levelProfile.levelId !== statistic.levelId
+    );
+    return [...statsWithoutLevel, levelProfile];
+  }
+
+  async updateUser(filter, update) {
+    await User.findOneAndUpdate(filter, update);
+  }
+
   hasUserUnlockedLevel(user, levelId) {
     const levelsUnlocked = this.getLevelsUnlocked(user);
     return levelsUnlocked.includes(levelId);
