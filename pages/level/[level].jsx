@@ -14,6 +14,8 @@ const defaultLevelProps = {
 };
 
 const Level = ({ level }) => {
+  const [errorMsg, setErrorMsg] = useState("");
+
   const user = useUser({ redirectTo: "/login" });
   const levelData = useLevel({
     levelId: level.id,
@@ -29,7 +31,7 @@ const Level = ({ level }) => {
     setInput(e.target.value);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     /** since the layout is flashed there's a
      * chance of user clicking the submit button
@@ -37,6 +39,32 @@ const Level = ({ level }) => {
     console.log(
       `${user.email} tried to submit solution ${input} to level :: ${level.id}`
     );
+
+    const body = {
+      levelId: level.id,
+      solution: input
+    };
+
+    try {
+      const res = await fetch("/api/solution", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
+
+      // will return
+      // 400 - when body not set properly,
+      // 403 - is not authenticated,
+      // 401 - if level is not unlocked by user,
+      // 200 -> status / message if wrong / completed / correct solution
+
+      console.log(res);
+    } catch (error) {
+      console.error("An unexpected error happened occurred:", error);
+      setErrorMsg(error.message);
+    }
 
     /** make request to API */
     /** load some kind of indicator to show success or request */
