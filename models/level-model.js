@@ -76,12 +76,27 @@ export default class LeveLModel {
     return hintsUnlocked;
   }
 
-  processLayer(levels) {
+  /**
+   * TODO: refactor / user descriptive name
+   * Abstracted function which iterates over each level and returns the
+   * title, summary, state and the hintsUnlocked props which are understood
+   * by the level cards.
+   * @param {*} levels All levels present in database
+   * @param {*} levelsUnlockedByUser list of levels unlocked by USer
+   * @returns
+   */
+  processLayer(levels, levelsUnlockedByUser) {
     const currentDate = getCurrentDate();
 
     return levels.map((level) => {
+      const isLevelUnlockedByUser = levelsUnlockedByUser.includes(level._id);
       const levelUnlocksAt = parseDate(level.unlocksAt);
-      const state = currentDate - levelUnlocksAt > 0 ? "" : "disabled";
+      // eslint-disable-next-line no-nested-ternary
+      const state = isLevelUnlockedByUser
+        ? ""
+        : currentDate - levelUnlocksAt > 0
+        ? ""
+        : "disabled";
 
       const summary = `level ${
         state === "disabled" ? "Unlocks" : "Unlocked"
