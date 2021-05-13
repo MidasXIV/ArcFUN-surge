@@ -16,6 +16,36 @@ export default class LeveLModel {
     return JSON.stringify(levelIDs);
   }
 
+  /**
+   * function returns a list of locked and unlocked levels _ids 
+   * based on their unlock time. 
+   * @returns { locked: [] , unlocked: [] }
+
+   */
+  async getAllLevelStatus() {
+    // since we want all level query object is empty.
+    const levelQuery = {};
+    // extract just the name,unlocksAt.
+    const levelProjection = {
+      _id: true,
+      unlocksAt: true
+    };
+
+    const levels = await JSON.parse(
+      await this.getLevel(levelQuery, levelProjection)
+    );
+    const defaultAccumulator = {
+      locked: [],
+      unlocked: []
+    };
+    return levels.reduce((accumulator, level) => {
+      const isUnlocked = this.isLevelUnlocked(level);
+      const state = isUnlocked ? "unlocked" : "locked";
+      accumulator[state].push(level._id);
+      return accumulator;
+    }, defaultAccumulator);
+  }
+
   async getLevel(query = {}, projection = {}) {
     const { db } = await connectToDatabase();
     const levels = await Level.find(query, projection);
@@ -31,9 +61,8 @@ export default class LeveLModel {
   }
 
   isLevelUnlocked(level) {
-    const currentDateISO = new Date().toISOString();
-    const currentDate = new Date(currentDateISO);
-    const levelUnlocksAt = new Date(level.unlocksAt);
+    const currentDate = getCurrentDate();
+    const levelUnlocksAt = parseDate(level.unlocksAt);
     return currentDate - levelUnlocksAt >= 0;
   }
 
@@ -68,5 +97,19 @@ export default class LeveLModel {
         hintsUnlocked
       };
     });
+  }
+
+  /**
+   * function takes in levels User has unlocked and
+   * all levels unlocked, it picks a level out of locked
+   * levels not unlocked by the User
+   */
+  unlockNewLevel(levelsUnlockedByUser, levelsStatus) {
+    /** locked levels not unlocked by the User */
+    const lockedLevels = levelsStatus.locked.filter(
+      (level) => !levelsUnlockedByUser.includes(level)
+    );
+
+    return lockedLevels.shift();
   }
 }
