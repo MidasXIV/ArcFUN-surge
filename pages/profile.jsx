@@ -5,7 +5,7 @@ const Profile = () => {
   const user = useUser({ redirectTo: "/login" });
 
   return (
-    <Layout title="ArcFUN | Profile">
+    <Layout title="Surge | Profile">
       <h1>Profile</h1>
       {user && (
         <>

@@ -9,6 +9,7 @@ import HintsPanel from "../../components/hints-panel";
 import SolutionInput from "../../components/solution-input";
 
 const defaultLevelProps = {
+  name: "Level",
   items: [],
   hints: []
 };
@@ -23,7 +24,7 @@ const Level = ({ level }) => {
     redirectIfUnauthorized: true
   });
 
-  const { hints, gallery } = levelData ?? defaultLevelProps;
+  const { hints, gallery, name } = levelData ?? defaultLevelProps;
 
   const [input, setInput] = useState("");
 
@@ -72,7 +73,7 @@ const Level = ({ level }) => {
 
   // Do Authentication and Authorization here.
   return (
-    <LevelLayout title="ArcFUN | Levels">
+    <LevelLayout title={`Surge | ${name}`}>
       <div className="flex flex-col h-full md:flex-row justify-end px-2 md:space-x-3">
         <div className="px-8 w-full md:w-2/3 lg:w-3/4 flex justify-center">
           <div className="flex flex-col max-w-2xl">
