@@ -1,7 +1,7 @@
 const Alert = ({title, message, status}) => (
   <>
     <div
-      className="relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md py-5 pl-6 pr-8 sm:pr-6"
+      className="animate-fade-in-down relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md py-5 pl-6 pr-8 sm:pr-6"
       id="messageModal"
     >
       <div className="flex flex-row items-center border-b sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0">
