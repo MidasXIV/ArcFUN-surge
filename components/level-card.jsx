@@ -2,6 +2,13 @@
 import cn from "classnames";
 import Link from "next/link";
 
+/**
+ * Component takes in 3 state
+ * if level is completed set state as "completed"
+ * if level is locked set state as "disabled"
+ * if level is unlocked but not completed set state as ""
+ * if level is loading set state as "loading"
+ */
 const LevelCard = ({ id, title, summary, state, hintsUnlocked }) => {
   // console.log(title, summary, state, hintsUnlocked);
   const MAX_NUM_HINTS = 3;

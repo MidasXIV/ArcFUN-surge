@@ -30,6 +30,7 @@ const handlers = {
 
     // Get all levels user has unlocked
     const levelsUnlockedByUser = userModel.getLevelsUnlocked(user);
+    const levelsSolvedByUser = userModel.getLevelsSolved(user);
 
     const levelQuery = {}; // since we want all level query object is empty.
     // extract just the name,unlocksAt and the hints.
@@ -45,7 +46,11 @@ const handlers = {
     );
 
     // TODO: Extract which levels the user has unlocked.
-    levels = levelModel.processLayer(levels, levelsUnlockedByUser);
+    levels = levelModel.processLayer(
+      levels,
+      levelsUnlockedByUser,
+      levelsSolvedByUser
+    );
 
     res.status(200).json({ levels });
   },

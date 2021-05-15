@@ -41,6 +41,14 @@ export default class UserModel {
     return levels;
   }
 
+  getLevelsSolved(user) {
+    const { statistics } = user;
+    const levels = statistics
+      .filter((statistic) => Boolean(statistic.solvedAt))
+      .map((statistic) => statistic.levelId);
+    return levels;
+  }
+
   getLevelProfile(user, levelId) {
     const { statistics } = user;
     return statistics.find((statistic) => levelId === statistic.levelId);
