@@ -5,22 +5,8 @@ import RulesPanel from "../components/rules-panel";
 import DashboardPanel from "../components/dashboard-panel";
 
 export async function getServerSideProps() {
-  const { client, db } = await connectToDatabase();
-
+  const { client } = await connectToDatabase();
   const isConnected = await client.isConnected();
-
-  const listingsAndReviews = await db
-    .collection("listingsAndReviews")
-    .find()
-    .sort({ _id: 1 })
-    .limit(2)
-    .toArray();
-  console.log(
-    listingsAndReviews.map((item) => ({
-      name: item.name,
-      summary: item.summary
-    }))
-  );
 
   return {
     props: { isConnected }
