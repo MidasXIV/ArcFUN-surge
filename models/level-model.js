@@ -77,6 +77,14 @@ export default class LeveLModel {
   }
 
   /**
+   * takes in all level info and levelId to return unlockAts time
+   */
+  getLevelUnlockTime(levels, levelId) {
+    const level = levels.find((_level) => _level._id === levelId);
+    return parseDate(level.unlocksAt);
+  }
+
+  /**
    * TODO: refactor / user descriptive name
    * Abstracted function which iterates over each level and returns the
    * title, summary, state and the hintsUnlocked props which are understood
