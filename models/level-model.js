@@ -34,6 +34,7 @@ export default class LeveLModel {
     const levels = await JSON.parse(
       await this.getLevel(levelQuery, levelProjection)
     );
+
     const defaultAccumulator = {
       locked: [],
       unlocked: []
@@ -44,6 +45,22 @@ export default class LeveLModel {
       accumulator[state].push(level._id);
       return accumulator;
     }, defaultAccumulator);
+  }
+
+  /**
+   * function takes in levels 
+   * returns a list of levels along with their state 
+   * based on their unlock time. 
+   * @returns [ { levelId, state: "locked" | "unlocked" } ]
+
+   */
+  getLevelsStatus(levels) {
+    return levels.reduce((accumulator, level) => {
+      const isUnlocked = this.isLevelUnlocked(level);
+      const state = isUnlocked ? "unlocked" : "locked";
+      accumulator.push({ levelId: level._id, state });
+      return accumulator;
+    }, []);
   }
 
   async getLevel(query = {}, projection = {}) {
