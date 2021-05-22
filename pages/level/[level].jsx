@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Error from "next/error";
 import { useUser } from "../../hooks/user";
 import { useLevel } from "../../hooks/level";
 
@@ -7,6 +8,7 @@ import LevelLayout from "../../components/level-layout";
 import Gallery from "../../components/gallery";
 import HintsPanel from "../../components/hints-panel";
 import SolutionInput from "../../components/solution-input";
+import ErrorLayout from "../../components/error-layout";
 
 const defaultLevelProps = {
   name: "Level",
@@ -15,10 +17,8 @@ const defaultLevelProps = {
 };
 
 const Level = ({ level }) => {
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const user = useUser({ redirectTo: "/login" });
-  const levelData = useLevel({
+  // const user = useUser({ redirectTo: "/login" });
+  const { levelData, error } = useLevel({
     levelId: level.id,
     redirectTo: "/login",
     redirectIfUnauthorized: true
@@ -71,7 +71,13 @@ const Level = ({ level }) => {
     /** load some kind of indicator to show success or request */
   };
 
-  // Do Authentication and Authorization here.
+  if (error) {
+    return (
+      <ErrorLayout title="ArcFUN | Levels">
+        <Error statusCode={error.status} title={error.info} />
+      </ErrorLayout>
+    );
+  }
   return (
     <LevelLayout title={`Surge | ${name}`}>
       <div className="flex flex-col h-full md:flex-row justify-end px-2 md:space-x-3">
