@@ -94,6 +94,24 @@ export default class LeveLModel {
   }
 
   /**
+   * function process hints and hides hints which are not unlocked
+   * @param {*} level
+   */
+  processHints(level) {
+    const currentDate = getCurrentDate();
+    const processedHint = level.hints.reduce((_hints, hint) => {
+      const hintUnlocksAt = parseDate(hint.unlocksAt);
+      const unlocked = currentDate - hintUnlocksAt > 0;
+      let { description } = hint;
+      if (!unlocked) {
+        description = `Level unlocks at ${hintUnlocksAt.toString()}`;
+      }
+      return [..._hints, { ...hint, description }];
+    }, []);
+    return processedHint;
+  }
+
+  /**
    * takes in all level info and levelId to return unlockAts time
    */
   getLevelUnlockTime(levels, levelId) {

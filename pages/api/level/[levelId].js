@@ -47,13 +47,11 @@ const handlers = {
       gallery: true
     };
 
-    const level = await JSON.parse(
+    let level = await JSON.parse(
       await levelModel.getLevel(levelQuery, levelProjection)
     );
 
-    // TODO: Extract which levels the user has unlocked.
-    // Filter out level descriptions which are not unlocked
-    // level = levelModel.processLayer(level);
+    level = level?.[0];
 
     /** check if user has access to the below level */
     const hasUserUnlockedLevel = userModel.hasUserUnlockedLevel(user, levelId);
@@ -68,7 +66,10 @@ const handlers = {
       return;
     }
 
-    res.status(200).json({ ...level[0] });
+    /** hide hints which are not unlocked */
+    level.hints = levelModel.processHints(level);
+
+    res.status(200).json(level);
   }
 };
 
