@@ -19,6 +19,8 @@
     "mongoose": "^5.11.12",
     "next": "latest",
     "react": "latest",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "react-dom": "latest",
     "swr": "0.1.16"
   },

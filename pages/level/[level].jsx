@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Error from "next/error";
-import { useUser } from "../../hooks/user";
+import { useAlert } from "react-alert";
 import { useLevel } from "../../hooks/level";
 
 import LevelModel from "../../models/level-model";
@@ -18,6 +18,7 @@ const defaultLevelProps = {
 
 const Level = ({ level }) => {
   // const user = useUser({ redirectTo: "/login" });
+  const alert = useAlert();
   const { levelData, error } = useLevel({
     levelId: level.id,
     redirectTo: "/login",
@@ -37,9 +38,8 @@ const Level = ({ level }) => {
     /** since the layout is flashed there's a
      * chance of user clicking the submit button
      */
-    console.log(
-      `${user.email} tried to submit solution ${input} to level :: ${level.id}`
-    );
+
+    alert.show(`Finding out if ${input} is the right soultion!`);
 
     const body = {
       levelId: level.id,
@@ -61,10 +61,23 @@ const Level = ({ level }) => {
       // 401 - if level is not unlocked by user,
       // 200 -> status / message if wrong / completed / correct solution
 
-      console.log(res);
-    } catch (error) {
-      console.error("An unexpected error happened occurred:", error);
-      setErrorMsg(error.message);
+      if (res.status === 200) {
+        const { status, message } = await res.json();
+        switch (status) {
+          case "fail":
+          case "completed":
+            alert.error(message);
+            break;
+          case "correct":
+            alert.success(message);
+            break;
+          default:
+            break;
+        }
+      }
+    } catch (_err) {
+      console.error("An unexpected error happened occurred:", _err);
+      alert.error(_err.message);
     }
 
     /** make request to API */
@@ -78,6 +91,7 @@ const Level = ({ level }) => {
       </ErrorLayout>
     );
   }
+
   return (
     <LevelLayout title={`Surge | ${name}`}>
       <div className="flex flex-col h-full md:flex-row justify-end px-2 md:space-x-3">
@@ -119,3 +133,8 @@ export async function getStaticProps({ params }) {
 }
 
 export default Level;
+
+/**
+ * Update level API to not return level data if unauthorized
+ * Handle showing and hiding banner
+ */
