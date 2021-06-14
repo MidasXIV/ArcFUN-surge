@@ -68,7 +68,7 @@ const RulesPanel = () => (
     {/* <!-- Ending of Rule 4 --> */}
 
     {/* <!-- Beginning of Rule 5 --> */}
-    <div className="bg-red-500 md:order-2 md:row-span-4 md:col-span-1 rounded-lg shadow-xl mb-5 md:pb-4 2xl:h-full">
+    <div className="bg-red-500 md:order-2 md:row-span-4 md:col-span-1 rounded-lg shadow-xl mb-5 md:pb-4">
       <div className="px-3 md:px-5 md:mt-4 mb-5 md:mb-0">
         <p className="text-white text-xl 2xl:text-4xl font-semibold px-4 md:px-0 mt-2 md:-mt-0">
           Something for everyone!

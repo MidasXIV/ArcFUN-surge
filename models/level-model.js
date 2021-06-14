@@ -104,7 +104,7 @@ export default class LeveLModel {
       const unlocked = currentDate - hintUnlocksAt > 0;
       let { description } = hint;
       if (!unlocked) {
-        description = `Level unlocks at ${hintUnlocksAt.toString()}`;
+        description = `Hint unlocks at ${hintUnlocksAt.toString()}`;
       }
       return [..._hints, { ...hint, description }];
     }, []);
@@ -134,18 +134,19 @@ export default class LeveLModel {
       const isLevelUnlockedByUser = levelsUnlockedByUser.includes(level._id);
       const isLevelSolvedByUser = levelsSolvedByUser.includes(level._id);
       const levelUnlocksAt = parseDate(level.unlocksAt);
-      // eslint-disable-next-line no-nested-ternary
+      const isUnlocked = this.isLevelUnlocked(level);
+
       let state;
       if (isLevelSolvedByUser) {
         state = "completed";
-      } else if (isLevelUnlockedByUser) {
+      } else if (isLevelUnlockedByUser || isUnlocked) {
         state = "";
       } else {
         state = "disabled";
       }
-      const summary = `level ${
+      const summary = `Level ${
         state === "disabled" ? "Unlocks" : "Unlocked"
-      } at ${currentDate - levelUnlocksAt}`;
+      } at ${levelUnlocksAt.toString()}`;
 
       const hintsUnlocked = this.getNumberOfHintsUnlocked(level);
 
