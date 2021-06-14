@@ -1,5 +1,5 @@
 const DashboardPanel = ({ user, isConnected }) => (
-  <div className="container mx-auto py-8 px-4 flex flex-col md:grid md:gap-4 md:grid-cols-4">
+  <div className="container mx-auto py-8 sm:px-4 flex flex-col md:grid md:gap-4 md:grid-cols-4">
     {/* <!-- Beginning of First Tile --> */}
     <div className="md:order-1 md:row-span-1 md:col-span-2">
       <div className="inline-grid max-w-xs sm:max-w-xs md:max-w-lg md:flex bg-black rounded-lg shadow-lg pb-6 md:pb-0">
@@ -59,8 +59,8 @@ const DashboardPanel = ({ user, isConnected }) => (
     {/* <!-- End of First Tile --> */}
 
     {/* <!-- Beginning of Second Tile --> */}
-    <div className="md:order-2 md:row-span-1 md:col-span-1">
-      <div className="inline-grid max-w-xs sm:max-w-xs md:max-w-lg md:flex bg-green-300 rounded-lg shadow-lg pb-6 md:pb-0 h-auto">
+    <div className="container md:order-2 md:row-span-1 md:col-span-1">
+      <div className="inline-grid w-full max-w-xs sm:max-w-xs md:max-w-lg md:flex bg-green-300 rounded-lg shadow-lg pb-6 md:pb-0 h-auto">
         <div className="w-full p-4">
           <div className="inline-grid">
             <p className="work-sans font-semibold text-xl text-black">Rank</p>
