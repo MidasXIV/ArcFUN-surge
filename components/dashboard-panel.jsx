@@ -1,3 +1,5 @@
+import Link from "next/link";
+import getAvatar from "../lib/avatar";
 const DashboardPanel = ({ user, isConnected }) => (
   <div className="container mx-auto py-8 sm:px-4 flex flex-col md:grid md:gap-4 md:grid-cols-4">
     {/* <!-- Beginning of First Tile --> */}
@@ -5,9 +7,9 @@ const DashboardPanel = ({ user, isConnected }) => (
       <div className="inline-grid max-w-xs sm:max-w-xs md:max-w-lg md:flex bg-black rounded-lg shadow-lg pb-6 md:pb-0">
         <div className="w-full md:w-1/3 md:p-4">
           <img
-            src="https://source.unsplash.com/nqEJ548Hqjs/800x600"
+            src={getAvatar(user)}
             alt="profile"
-            className="h-64 md:h-full object-cover object-center w-full"
+            className="h-64 md:h-full object-cover object-center w-full rounded-lg"
           />
         </div>
 
@@ -42,9 +44,11 @@ const DashboardPanel = ({ user, isConnected }) => (
           type="button"
           className="text-white py-3 px-4 rounded-lg bg-blue-500"
         >
-          <p className="work-sans font-semibold text-sm tracking-wide">
-            Levels
-          </p>
+          <Link href="/level">
+            <p className="work-sans font-semibold text-sm tracking-wide">
+              Levels
+            </p>
+          </Link>
         </button>
         <button
           type="button"
@@ -75,9 +79,11 @@ const DashboardPanel = ({ user, isConnected }) => (
           type="button"
           className="text-white py-3 px-4 rounded-lg bg-black"
         >
-          <p className="work-sans font-semibold text-sm tracking-wide">
-            Find out!
-          </p>
+          <Link href="/profile">
+            <p className="work-sans font-semibold text-sm tracking-wide">
+              Find out!
+            </p>
+          </Link>
         </button>
       </div>
     </div>

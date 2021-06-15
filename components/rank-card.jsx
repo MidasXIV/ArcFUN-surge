@@ -1,5 +1,6 @@
 import cn from "classnames";
 import { isLevelCompleted, isLevelUnlocked } from "../lib/user-stats";
+import getAvatar from "../lib/avatar";
 
 const RankCard = ({ isLoading = false, rank, user, levelStatus }) => (
   <div className="bg-white w-full flex font-mono items-start p-2 rounded-xl shadow border max-w-sm cursor-pointer">
@@ -7,7 +8,7 @@ const RankCard = ({ isLoading = false, rank, user, levelStatus }) => (
       <img
         alt="avatar"
         className="bg-black border-2 border-black rounded-xl max-h-24"
-        src="https://avataaars.io/?avatarStyle=Transparent&topType=LongHairFrida&accessoriesType=Prescription01&facialHairType=BeardLight&facialHairColor=Brown&clotheType=Hoodie&clotheColor=Gray02&eyeType=Side&eyebrowType=FlatNatural&mouthType=Concerned&skinColor=Pale"
+        src={getAvatar(user)}
       />
     </div>
     <div className="flex-grow px-3 py-1">
