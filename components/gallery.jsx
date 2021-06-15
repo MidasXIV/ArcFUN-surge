@@ -111,7 +111,8 @@ const ImageGallerySwitch = ({ items }) => {
             alt={items[3].alt}
             src={items[3].src}
           />
-        </div>);
+        </div>
+      );
     default:
       return <></>;
   }
