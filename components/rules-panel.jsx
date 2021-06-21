@@ -23,7 +23,7 @@ const RulesPanel = () => (
         <br />
         <p className="text-white text-opacity-50 font-medium md:text-sm 2xl:text-3xl pl-6 md:pl-5 pr-4 md:mt-2 2xl:mt-2 2xl:px-8">
           Hints for all levels will be unlocked as per schedule. A new hint will
-          be unlocked every 2 hours after the level is unlocked.
+          be unlocked every 3 hours after the level is unlocked.
         </p>
       </div>
     </div>
@@ -60,8 +60,8 @@ const RulesPanel = () => (
           be entered as &quot;axyz&quot;
           <br />
           If your answer is a date, it should be entered in ddmmyyyy format. For
-          example, if your answer is &quot;14th April, 1998&quot; you should
-          enter &quot;14041998&quot;
+          example, if your answer is &quot;14th February, 1998&quot; you should
+          enter &quot;14021998&quot;
         </p>
       </div>
     </div>
@@ -75,7 +75,23 @@ const RulesPanel = () => (
         </p>
         <br />
         <p className="text-white text-opacity-75 font-medium md:text-sm 2xl:text-3xl px-4 md:px-0 2xl:px-4 md:pr-3 mt-2 md:mt-1 2xl:mt-2 2xl:pb-64">
-          New levels are unlocked every 6 hours
+          New levels are unlocked every 24 hours.
+        </p>
+        <br />
+        <p className="text-white text-opacity-75 font-medium md:text-sm 2xl:text-3xl px-4 md:px-0 2xl:px-4 md:pr-3 mt-2 md:mt-1 2xl:mt-2 2xl:pb-64">
+          Each level needs the user to complete a sequence of steps to reach the
+          final answer.
+        </p>
+        <br />
+        <p className="text-white text-opacity-75 font-medium md:text-sm 2xl:text-3xl px-4 md:px-0 2xl:px-4 md:pr-3 mt-2 md:mt-1 2xl:mt-2 2xl:pb-64">
+          For Grids <span className="font-black">ALWAYS</span> check the{" "}
+          <span className="font-black">order</span>
+          using debugger tools.
+        </p>
+        <br />
+        <p className="text-white text-opacity-75 font-medium md:text-sm 2xl:text-3xl px-4 md:px-0 2xl:px-4 md:pr-3 mt-2 md:mt-1 2xl:mt-2 2xl:pb-64">
+          Some puzzle require programming it&apos;s best to pair with someone
+          that can do basic web programming.
         </p>
       </div>
     </div>
