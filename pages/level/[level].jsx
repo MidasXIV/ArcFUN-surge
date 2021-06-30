@@ -96,7 +96,7 @@ const Level = ({ level }) => {
     <LevelLayout title={`Surge | ${name}`}>
       <div className="flex flex-col h-full md:flex-row justify-end px-2 md:space-x-3">
         <div className="px-8 w-full md:w-2/3 lg:w-3/4 flex justify-center">
-          <div className="flex flex-col max-w-2xl">
+          <div className="flex flex-col container">
             <Gallery items={gallery} />
             <SolutionInput
               value={input}

@@ -27,7 +27,7 @@ const ImageGallerySwitch = ({ items }) => {
     case 1:
       return (
         <img
-          className="max-w-xl rounded-lg"
+          className="container rounded-lg"
           alt={items[0].alt}
           src={items[0].src}
         />
