@@ -1,18 +1,26 @@
 import { useRef, useEffect } from "react";
-import { useRouter } from "next/router";
 import Layout from "../../components/layout";
 
 const AUH = () => {
   const dot = useRef(null);
-  const router = useRouter();
+
+  const printImage = (url) => {
+    console.log(
+      "%c ",
+      "font-size:400px; backdround-size: contain;" +
+        `background:url(${url}) no-repeat;`
+    );
+  };
 
   useEffect(() => {
     const onClick = () => {
       if (typeof window !== "undefined") {
-        const { hostname } = window.location;
-        console.log(`Path:: ${hostname}`);
+        const { href } = window.location;
+        console.log(`Path:: ${href}`);
+        printImage(
+          "https://user-images.githubusercontent.com/24829816/124516724-5f43c380-ddf3-11eb-88dc-3294e29afbf2.png"
+        );
       }
-      console.log(`Path:: ${router.basePath}/${router.pathname}`);
     };
 
     if (dot && dot.current) {
