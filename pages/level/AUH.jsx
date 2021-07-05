@@ -3,6 +3,53 @@ import Layout from "../../components/layout";
 
 const AUH = () => {
   const dot = useRef(null);
+  const wordSplit = [500, 500, 500, 500];
+  const morseDash = 300;
+  const morseDot = 100;
+  const morseCode = [
+    ...wordSplit,
+    morseDash,
+    ...wordSplit,
+    morseDot,
+    morseDash + morseDash,
+    ...wordSplit,
+    morseDot,
+    ...wordSplit,
+    morseDash,
+    morseDot,
+    ...wordSplit,
+    morseDash,
+    ...wordSplit,
+    morseDash,
+    morseDot,
+    morseDash + morseDash,
+    ...wordSplit,
+    morseDash, // vibrates
+    morseDot,
+    ...wordSplit,
+    morseDot + morseDot,
+    ...wordSplit,
+    morseDash,
+    morseDot,
+    ...wordSplit,
+    morseDot,
+    ...wordSplit,
+    morseDash,
+    ...wordSplit,
+    morseDot + morseDot + morseDot + morseDot,
+    ...wordSplit,
+    morseDot,
+    morseDash + morseDash + morseDash,
+    ...wordSplit,
+    morseDot + morseDot,
+    morseDash,
+    ...wordSplit,
+    morseDash,
+    morseDot,
+    ...wordSplit,
+    morseDot,
+    ...wordSplit
+  ];
 
   const printImage = (url) => {
     console.log(
@@ -13,6 +60,27 @@ const AUH = () => {
   };
 
   useEffect(() => {
+    let vibrateInterval;
+    // Stops vibration
+    const stopVibrate = () => {
+      // Clear interval and stop persistent vibrating
+      if (vibrateInterval) clearInterval(vibrateInterval);
+      navigator.vibrate(0);
+    };
+
+    // Starts vibration at passed in level
+    const startVibrate = (duration) => {
+      navigator.vibrate(duration);
+    };
+
+    // Start persistent vibration at given duration and interval
+    // Assumes a number value is given
+    const startPersistentVibrate = (duration, interval) => {
+      vibrateInterval = setInterval(() => {
+        startVibrate(duration);
+      }, interval);
+    };
+
     const onClick = () => {
       if (typeof window !== "undefined") {
         const { href } = window.location;
@@ -23,7 +91,7 @@ const AUH = () => {
         );
       }
 
-      window.navigator.vibrate([200, 100, 200]);
+      startPersistentVibrate(morseCode, 15000);
     };
 
     if (dot && dot.current) {
@@ -31,7 +99,7 @@ const AUH = () => {
     }
 
     return () => {
-      navigator.vibrate(0);
+      stopVibrate();
       dot.current.removeEventListener(onClick);
     };
   });
