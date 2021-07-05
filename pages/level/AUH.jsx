@@ -17,10 +17,13 @@ const AUH = () => {
       if (typeof window !== "undefined") {
         const { href } = window.location;
         console.log(`Path:: ${href}`);
+        console.log("Please view on Chrome");
         printImage(
           "https://user-images.githubusercontent.com/24829816/124516724-5f43c380-ddf3-11eb-88dc-3294e29afbf2.png"
         );
       }
+
+      window.navigator.vibrate([200, 100, 200]);
     };
 
     if (dot && dot.current) {
@@ -28,6 +31,7 @@ const AUH = () => {
     }
 
     return () => {
+      navigator.vibrate(0);
       dot.current.removeEventListener(onClick);
     };
   });
