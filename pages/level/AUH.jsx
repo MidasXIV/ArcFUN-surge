@@ -6,49 +6,67 @@ const AUH = () => {
   const wordSplit = [500, 500, 500, 500];
   const morseDash = 300;
   const morseDot = 100;
+  const morseFiller = 0;
+  // wordsplit should be followed by a dash or filler
+  // wordsplit should be preceeded by a dot or filler
   const morseCode = [
-    ...wordSplit,
-    morseDash,
-    ...wordSplit,
-    morseDot,
-    morseDash + morseDash,
-    ...wordSplit,
-    morseDot,
-    ...wordSplit,
-    morseDash,
-    morseDot,
-    ...wordSplit,
-    morseDash,
-    ...wordSplit,
-    morseDash,
-    morseDot,
-    morseDash + morseDash,
-    ...wordSplit,
-    morseDash, // vibrates
-    morseDot,
-    ...wordSplit,
-    morseDot + morseDot,
-    ...wordSplit,
-    morseDash,
-    morseDot,
-    ...wordSplit,
-    morseDot,
-    ...wordSplit,
-    morseDash,
-    ...wordSplit,
-    morseDot + morseDot + morseDot + morseDot,
-    ...wordSplit,
-    morseDot,
-    morseDash + morseDash + morseDash,
-    ...wordSplit,
-    morseDot + morseDot,
-    morseDash,
-    ...wordSplit,
-    morseDash,
-    morseDot,
-    ...wordSplit,
-    morseDot,
-    ...wordSplit
+    ...wordSplit, // .............. break
+    morseDash, // ................. vibrate
+    morseFiller, // ............... blank
+    ...wordSplit, // .............. break
+    morseFiller, // ............... vibrate
+    morseDot, // .................. blank
+    morseDash + morseDash, // ..... vibrate
+    morseFiller, // ............... blank
+    ...wordSplit, // .............. break
+    morseFiller, // ............... vibrate
+    morseDot, // .................. blank
+    ...wordSplit, // .............. break
+    morseDash, // ................. vibrate
+    morseDot, // .................. blank
+    ...wordSplit, // .............. break
+    morseDash, // ................. vibrate
+    morseFiller, // ............... blank
+    ...wordSplit, // .............. break
+    morseDash, // ................. vibrate
+    morseDot, // .................. blank
+    morseDash + morseDash, // ..... vibrate
+    morseFiller, // ............... blank
+    ...wordSplit, // .............. break
+    morseDash, // ................. vibrates
+    morseDot, // .................. blank
+    ...wordSplit, // .............. break
+    morseFiller, // ............... vibrate
+    morseDot + morseDot, // ....... blank
+    ...wordSplit, // .............. break
+    morseDash, // ................. vibrate
+    morseDot, // .................. blank
+    ...wordSplit, // .............. break
+    morseFiller, // ............... vibrate
+    morseDot, // .................. blank
+    ...wordSplit, // .............. break
+    morseDash, // ................. vibrate
+    morseFiller, // ............... blank
+    ...wordSplit, // .............. break
+    morseFiller, // ............... vibrate
+    morseDot + morseDot + morseDot + morseDot, // .. blank
+    ...wordSplit, // .............. break
+    morseFiller, // ............... vibrate
+    morseDot, // .................. blank
+    morseDash + morseDash + morseDash, // .......... vibrate
+    morseFiller, // ............... blank
+    ...wordSplit, // .............. break
+    morseFiller, // ............... vibrate
+    morseDot + morseDot, // ....... blank
+    morseDash, // ................. vibrate
+    morseFiller, // ............... blank
+    ...wordSplit, // .............. break
+    morseDash, // ................. vibrate
+    morseDot, // .................. blank
+    ...wordSplit, // .............. break
+    morseFiller, // ............... vibrate
+    morseDot, // .................. blank
+    ...wordSplit // ............... break
   ];
 
   const printImage = (url) => {
