@@ -16,10 +16,10 @@ import cn from "classnames";
  */
 
 const assignOrder = (item) => ({
-  "order-1": item.order === 1,
-  "order-2": item.order === 2,
-  "order-3": item.order === 3,
-  "order-4": item.order === 4
+  "order-1": +item.order === 1,
+  "order-2": +item.order === 2,
+  "order-3": +item.order === 3,
+  "order-4": +item.order === 4
 });
 
 const ImageGallerySwitch = ({ items }) => {
