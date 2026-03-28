@@ -1,18 +1,13 @@
 import createHandlers from "../../../lib/rest-utils";
 import LevelModel from "../../../models/level-model";
 import UserModel from "../../../models/user-model";
-import { getSession } from "../../../lib/auth-cookies";
+import { getRequestUser } from "../../../lib/request-user";
 
 const handlers = {
   GET: async (req, res) => {
     const levelModel = new LevelModel();
     const { levelId } = req.query;
-    const { email } = (await getSession(req)) || {};
-    // if no session throw unauthorised error
-    if (!email) {
-      res.status(403).send(`Please login to access this API route`);
-      return;
-    }
+    const currentUser = await getRequestUser(req);
     if (!levelId) {
       res
         .status(400)
@@ -20,20 +15,9 @@ const handlers = {
       return;
     }
     // TODO check if user has access to the below level
-    console.log(`Getting level ${levelId} for ${email}`);
+    console.log(`Getting level ${levelId} for ${currentUser.email}`);
     /** extract the user's, statistics */
     const userModel = new UserModel();
-    const userQuery = {
-      email
-    };
-    const userProjection = {
-      _id: false,
-      statistics: true
-    };
-
-    const user = await JSON.parse(
-      await userModel.getUser(userQuery, userProjection)
-    );
 
     const levelQuery = {
       _id: levelId
@@ -54,7 +38,10 @@ const handlers = {
     level = level?.[0];
 
     /** check if user has access to the below level */
-    const hasUserUnlockedLevel = userModel.hasUserUnlockedLevel(user, levelId);
+    const hasUserUnlockedLevel = userModel.hasUserUnlockedLevel(
+      currentUser,
+      levelId
+    );
     const isLevelUnlocked = levelModel.isLevelUnlocked(level);
     const isLevelValid = hasUserUnlockedLevel || isLevelUnlocked;
 

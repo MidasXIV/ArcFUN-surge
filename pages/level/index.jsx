@@ -3,10 +3,7 @@ import Layout from "../../components/layout";
 import LevelCard from "../../components/level-card";
 
 const Level = () => {
-  const levels = useLevels({
-    redirectTo: "/login",
-    redirectIfUnauthorized: true
-  });
+  const levels = useLevels();
 
   // if (!levels) {
   //   return (

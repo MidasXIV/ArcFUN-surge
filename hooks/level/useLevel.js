@@ -4,7 +4,7 @@ import Router from "next/router";
 import useSWR from "swr";
 import fetcher from "../fetcher";
 
-const useLevel = ({ levelId, redirectTo, redirectIfUnauthorized } = {}) => {
+const useLevel = ({ levelId, redirectTo } = {}) => {
   const { data, error } = useSWR(`/api/level/${levelId}`, fetcher(), {
     onErrorRetry: (_error, key, config, revalidate, { retryCount }) => {
       // Never retry on 404.
@@ -32,10 +32,7 @@ const useLevel = ({ levelId, redirectTo, redirectIfUnauthorized } = {}) => {
 
   useEffect(() => {
     if (!redirectTo || !finished) return;
-    if (redirectIfUnauthorized && hasError && error.status === 403) {
-      Router.push(redirectTo);
-    }
-  }, [redirectTo, redirectIfUnauthorized, finished]);
+  }, [redirectTo, finished]);
 
   return { error, levelData: hasError ? null : levels };
 };

@@ -5,8 +5,14 @@ import RulesPanel from "../components/rules-panel";
 import DashboardPanel from "../components/dashboard-panel";
 
 export async function getServerSideProps() {
-  const { client } = await connectToDatabase();
-  const isConnected = await client.isConnected();
+  let isConnected = false;
+
+  try {
+    const { connection } = await connectToDatabase();
+    isConnected = connection?.readyState === 1;
+  } catch (error) {
+    console.error("Failed to connect to MongoDB for home page:", error.message);
+  }
 
   return {
     props: { isConnected }
@@ -17,13 +23,7 @@ const Home = ({ isConnected }) => {
   const user = useUser();
   return (
     <Layout title="Surge | Dashboard">
-      {user ? (
-        <DashboardPanel user={user} isConnected={isConnected} />
-      ) : (
-        <div className="text-6xl pb-4 font-semibold text-gray-900 leading-none">
-          Login to join the Fun!
-        </div>
-      )}
+      {user && <DashboardPanel user={user} isConnected={isConnected} />}
 
       <h1 className="pb-2 text-4xl font-semibold text-gray-900 leading-none">
         Rules

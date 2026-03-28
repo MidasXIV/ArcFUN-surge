@@ -8,59 +8,70 @@ import UserModel from "../models/user-model";
 import LevelModel from "../models/level-model";
 
 export async function getServerSideProps() {
-  const { client } = await connectToDatabase();
-  const isConnected = await client.isConnected();
+  let isConnected = false;
+  let ranks = [];
+  let levelStatus = [];
 
-  /** get all users */
-  const userModel = new UserModel();
-  const userQuery = {};
-  const userProjection = {
-    _id: true,
-    email: true,
-    statistics: true
-  };
+  try {
+    const { connection } = await connectToDatabase();
+    isConnected = connection?.readyState === 1;
 
-  const users = await JSON.parse(
-    await userModel.getUsers(userQuery, userProjection)
-  );
+    /** get all users */
+    const userModel = new UserModel();
+    const userQuery = {};
+    const userProjection = {
+      _id: true,
+      email: true,
+      statistics: true
+    };
 
-  /** get all levels */
-  const levelModel = new LevelModel();
-  const levelQuery = {};
-  const levelProjection = {
-    _id: true,
-    unlocksAt: true,
-    hints: true
-  };
+    const users = await JSON.parse(
+      await userModel.getUsers(userQuery, userProjection)
+    );
 
-  const levels = await JSON.parse(
-    await levelModel.getLevel(levelQuery, levelProjection)
-  );
+    /** get all levels */
+    const levelModel = new LevelModel();
+    const levelQuery = {};
+    const levelProjection = {
+      _id: true,
+      unlocksAt: true,
+      hints: true
+    };
 
-  const ranks = getRanks(users, levels);
-  const levelStatus = levelModel.getLevelsStatus(levels);
+    const levels = await JSON.parse(
+      await levelModel.getLevel(levelQuery, levelProjection)
+    );
 
-  console.log(levelStatus);
+    ranks = getRanks(users, levels);
+    levelStatus = levelModel.getLevelsStatus(levels);
+
+    console.log(levelStatus);
+  } catch (error) {
+    console.error("Failed to load profile data:", error.message);
+  }
+
   return {
     props: { isConnected, ranks, levelStatus }
   };
 }
 
 const Profile = ({ ranks, levelStatus }) => {
-  // const user = useUser({ redirectTo: "/login" });
   const user = useUser();
+  const currentRank = user ? ranks.find((rank) => rank.email === user.email) : null;
 
   return (
     <Layout title="Surge | Profile">
-      {user && (
+      {currentRank ? (
         <section className="my-4 p-4 bg-black rounded-lg">
           <h1 className="text-4xl pb-4 font-semibold text-gray-200 leading-none">
             Profile
           </h1>
           {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
-          <LevelStatisticsTable
-            user={ranks.find((rank) => rank.email === user.email)}
-          />
+          <LevelStatisticsTable user={currentRank} />
+        </section>
+      ) : (
+        <section className="my-4 p-4 bg-black rounded-lg text-gray-200">
+          Guest mode is enabled. Ranking is visible, but personal progress is not tracked.
         </section>
       )}
       <h1 className="text-4xl pb-4 font-semibold text-gray-900 leading-none">

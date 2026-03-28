@@ -37,4 +37,6 @@ const LevelSchema = Schema({
   }
 });
 
-module.exports = models.level || model("level", LevelSchema);
+const Level = models.level || model("level", LevelSchema);
+
+export default Level;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Error from "next/error";
-import { useAlert } from "react-alert";
+import { useAlert } from "../../components/alert-provider";
 import { useLevel } from "../../hooks/level";
 
 import LevelModel from "../../models/level-model";
@@ -17,13 +17,8 @@ const defaultLevelProps = {
 };
 
 const Level = ({ level }) => {
-  // const user = useUser({ redirectTo: "/login" });
   const alert = useAlert();
-  const { levelData, error } = useLevel({
-    levelId: level.id,
-    redirectTo: "/login",
-    redirectIfUnauthorized: true
-  });
+  const { levelData, error } = useLevel({ levelId: level.id });
 
   const { hints, gallery, name } = levelData ?? defaultLevelProps;
 
@@ -57,7 +52,6 @@ const Level = ({ level }) => {
 
       // will return
       // 400 - when body not set properly,
-      // 403 - is not authenticated,
       // 401 - if level is not unlocked by user,
       // 200 -> status / message if wrong / completed / correct solution
 

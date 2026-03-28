@@ -1,36 +1,18 @@
 import createHandlers from "../../../lib/rest-utils";
 import LevelModel from "../../../models/level-model";
 import UserModel from "../../../models/user-model";
-import { getSession } from "../../../lib/auth-cookies";
+import { getRequestUser } from "../../../lib/request-user";
 
 const handlers = {
   GET: async (req, res) => {
     const levelModel = new LevelModel();
-    const { email } = (await getSession(req)) || {};
-    // if no session throw unauthorised error
-
-    if (!email) {
-      res.status(403).send(`Please login to access this API route`);
-      return;
-    }
+    const currentUser = await getRequestUser(req);
 
     /** extract the user's, statistics */
     const userModel = new UserModel();
-    const userQuery = {
-      email
-    };
-    const userProjection = {
-      _id: false,
-      statistics: true
-    };
-
-    const user = await JSON.parse(
-      await userModel.getUser(userQuery, userProjection)
-    );
-
     // Get all levels user has unlocked
-    const levelsUnlockedByUser = userModel.getLevelsUnlocked(user);
-    const levelsSolvedByUser = userModel.getLevelsSolved(user);
+    const levelsUnlockedByUser = userModel.getLevelsUnlocked(currentUser);
+    const levelsSolvedByUser = userModel.getLevelsSolved(currentUser);
 
     const levelQuery = {}; // since we want all level query object is empty.
     // extract just the name,unlocksAt and the hints.
@@ -57,10 +39,10 @@ const handlers = {
 
   POST: async (req, res) => {
     const levelModel = new LevelModel();
-    const { email } = await getSession(req);
+    const currentUser = await getRequestUser(req, { email: true });
     const level = await levelModel.createLevel(req.body);
     const { _id } = level;
-    console.log(`New level created by ${email} :: ${_id}`);
+    console.log(`New level created by ${currentUser.email} :: ${_id}`);
     res.status(200).json({ _id });
   }
 };

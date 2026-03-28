@@ -19,7 +19,7 @@ const DashboardPanel = ({ user, isConnected }) => (
               Dashboard
             </p>
             <p className="raleway text-sm my-4 text-white opacity-75">
-              Currently logged in as {user.email}
+              Viewing as {user.email}
               {isConnected ? (
                 <div className="flex flex-row">
                   Connection to Server

@@ -1,8 +1,8 @@
 import createHandlers from "../../lib/rest-utils";
 import LevelModel from "../../models/level-model";
 import UserModel from "../../models/user-model";
-import { getSession } from "../../lib/auth-cookies";
 import { getCurrentDateISO } from "../../lib/date-time";
+import { getRequestUser, isGuestUser } from "../../lib/request-user";
 
 const handlers = {
   POST: async (req, res) => {
@@ -17,27 +17,14 @@ const handlers = {
       return;
     }
 
-    const { email } = (await getSession(req)) || {};
-    // if no session throw unauthorised error
-
-    if (!email) {
-      res.status(403).send(`Please login to access this API route`);
-      return;
-    }
+    const currentUser = await getRequestUser(req);
 
     /** extract the user's, statistics */
     const userModel = new UserModel();
     const userQuery = {
-      email
+      email: currentUser.email
     };
-    const userProjection = {
-      _id: false,
-      statistics: true
-    };
-
-    const user = await JSON.parse(
-      await userModel.getUser(userQuery, userProjection)
-    );
+    const user = currentUser;
 
     // do undefined check, throw error
     // Check if level is already solved
@@ -119,6 +106,17 @@ const handlers = {
       hintsTaken
     };
 
+    if (isGuestUser(currentUser)) {
+      res.status(200).json({
+        status: "correct",
+        message: `${solution} is the right answer to this level. Progress is not saved in guest mode.`,
+        ...thisLevelProfile,
+        isAnswerValid,
+        newUnlockedLevel: null
+      });
+      return;
+    }
+
     let updatedStatistics = userModel.updateLevelProfile(
       user.statistics,
       thisLevelProfile
@@ -135,7 +133,7 @@ const handlers = {
       );
     }
 
-    userModel.updateUser(userQuery, {
+    await userModel.updateUser(userQuery, {
       statistics: updatedStatistics
     });
 
